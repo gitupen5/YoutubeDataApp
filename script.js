@@ -22,16 +22,16 @@ $(document).ready(function () {
 
   //getting video id from the url
 
-  let p1 = "https://www.youtube.com/watch?v=";
-  let p2 = "https://youtube.com/watch?v=";
-  let p3 = "https://youtu.be/";
-  let p4 = "https://www.youtu.be/";
+  // let p1 = "https://www.youtube.com/watch?v=";
+  // let p2 = "https://youtube.com/watch?v=";
+  // let p3 = "https://youtu.be/";
+  // let p4 = "https://www.youtu.be/";
 
   function getVideoId(url) {
     if (url.split("://")[1].length < 26) {
       return url.split("be/")[1].substring(0, 11);
     } else if (url.split("://")[1].length > 26) {
-      return url.split("watch?v=")[1];
+      return url.split("watch?v=")[1].substring(0, 11);
     } else {
       return "";
     }
@@ -55,50 +55,61 @@ $(document).ready(function () {
       var description = unescape(data.items[0].snippet.description);
 
       var tags = data.items[0].snippet.tags;
-
-      var thumbnail = data.items[0].snippet.thumbnails.maxres.url;
+      try {
+        var thumbnail = data.items[0].snippet.thumbnails.maxres.url;
+      } catch (error) {
+        console.log(error);
+      }
 
       var tagsResult = "";
 
-      tags.forEach((tag) => {
-        tagsResult += tag + ",";
-      });
+      try {
+        tags.forEach((tag) => {
+          tagsResult += tag + ", ";
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
       //appending data in result div
-      $("#result").append(`
+      try {
+        $("#result").append(`
   
-              <h3 class ="text-center">Thumbnail:</h3>
-  
-              <img id="img" src="${thumbnail}" class="img-thumbnail" />
-  
-              <div class="form-group">
-  
-              <label for="title" class="text-center py-3 ">Title:</label>
-              
+      <h3 class ="text-center">Thumbnail:</h3>
 
-              <input type="text" class="form-control" disabled="true" value="${title}"/>
-  
-              </div>
-  
-  
-              <div class="form-group">
-  
-              <label for="description" class="text-center py-3" >Description:</label>
-              
-              <textarea cols="12" rows="9" class="form-control" disabled="true">${description}</textarea>
-  
-              </div>
-  
-  
-              <div class="form-group">
-  
-              <label for="tags" class="text-center py-3">Tags:</label>
-              
-              <textarea cols="12" rows="5" class="form-control" disabled="true">${tagsResult}</textarea>
-  
-              </div>
-              
-              `);
+      <img id="img" src="${thumbnail}" class="img-thumbnail" />
+
+      <div class="form-group">
+
+      <label for="title" class="text-center py-3 ">Title:</label>
+      
+
+      <input type="text" class="form-control" disabled="true" value="${title}"/>
+
+      </div>
+
+
+      <div class="form-group">
+
+      <label for="description" class="text-center py-3" >Description:</label>
+      
+      <textarea cols="12" rows="9" class="form-control" disabled="true">${description}</textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+      <label for="tags" class="text-center py-3">Tags:</label>
+      
+      <textarea cols="12" rows="5" class="form-control" disabled="true">${tagsResult}</textarea>
+
+      </div>
+      
+      `);
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 });
