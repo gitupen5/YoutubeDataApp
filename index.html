@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube Info App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+
+    <!-- Styles Start-->
+    <style>
+      body {
+        background-color: hsla(0, 0%, 9%, 0.822);
+      }
+      .text-center {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <br />
+      <h1 class="text-center py-5">YouTubify</h1>
+      <br /><br />
+      <form id="myForm">
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name=""
+            id="url"
+            required
+            placeholder="Paste Youtube video URL (eg. https://www.youtube.com/watch?v=lJsFybwh2pw&ab_channel=Trimix)"
+          />
+        </div>
+        <div class="form-group py-5 text-center">
+          <button class="btn btn-danger btn-block">Generate Info</button>
+        </div>
+      </form>
+      <div id="result"></div>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script src="script.js"></script>
+</html>
