@@ -21,8 +21,20 @@ $(document).ready(function () {
   });
 
   //getting video id from the url
+
+  let p1 = "https://www.youtube.com/watch?v=";
+  let p2 = "https://youtube.com/watch?v=";
+  let p3 = "https://youtu.be/";
+  let p4 = "https://www.youtu.be/";
+
   function getVideoId(url) {
-    return url.split("v=")[1];
+    if (url.split("://")[1].length < 26) {
+      return url.split("be/")[1].substring(0, 11);
+    } else if (url.split("://")[1].length > 26) {
+      return url.split("watch?v=")[1];
+    } else {
+      return "";
+    }
   }
 
   //get info from api
@@ -31,6 +43,7 @@ $(document).ready(function () {
     $.get(apiUrl, function (data) {
       console.log(data);
 
+      console.log("Api Url: ", apiUrl);
       //clear out when making a new request
       $("#result").empty();
 
